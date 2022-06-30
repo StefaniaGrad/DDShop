@@ -1,0 +1,16 @@
+server:
+  servlet:
+    context-path: /api
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ddshop
+    username: root
+    password: root
+  jpa:
+    hibernate.ddl-auto: none
+    generate-ddl: true
+    show-sql: true
+  flyway:
+    locations:
+      - "classpath:db/migration"
