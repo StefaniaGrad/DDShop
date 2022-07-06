@@ -1,10 +1,13 @@
 package dd.projects.DDShop.enitities;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.List;
-
+@Getter
+@Setter
 @Entity
 public class Product {
 
@@ -30,6 +33,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<CartEntry> cartEntryList;
+
+    @OneToMany(mappedBy = "product")
+    private List<Variant> variants;
 
 
 }

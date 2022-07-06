@@ -8,18 +8,19 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class AttributeValue {
-
+public class Sel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String value;
-
     @ManyToOne
-    @JoinColumn(name="product_attribute_id")
+    @JoinColumn(name="attribute_id")
     private ProductAttribute productAttribute;
 
-    @OneToMany(mappedBy = "attributeValue")
-    private List<Sel> sels;
+    @ManyToOne
+    @JoinColumn(name="value_id")
+    private AttributeValue attributeValue;
+
+    @ManyToMany(mappedBy = "sels")
+    private List<Variant> variants;
 }

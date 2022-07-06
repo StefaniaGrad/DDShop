@@ -8,18 +8,22 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Category {
+public class Variant {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private String description;
+
+    @ManyToOne
+    @JoinColumn(name="product_id")
+    private Product product;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Product_Category",
-            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id",
+    @JoinTable(name = "Sel_Var",
+            joinColumns = @JoinColumn(name = "sel_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "variant_id",
                     referencedColumnName = "id"))
-    private List<Product> products;
+    private List<Sel> sels;
+
 
 }

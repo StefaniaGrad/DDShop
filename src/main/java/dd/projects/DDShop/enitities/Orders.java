@@ -1,8 +1,12 @@
 package dd.projects.DDShop.enitities;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+@Getter
+@Setter
 @Entity
 public class Orders {
     @Id
