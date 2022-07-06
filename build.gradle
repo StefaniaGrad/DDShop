@@ -22,11 +22,10 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.flywaydb:flyway-core'
-	implementation 'org.flywaydb:flyway-core:8.4.4'
-	implementation 'org.flywaydb:flyway-mysql:8.4.4'
-
-
+	//implementation 'org.flywaydb:flyway-core'
+	//implementation 'org.flywaydb:flyway-core:8.4.4'
+	//implementation 'org.flywaydb:flyway-mysql:8.4.4'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -38,7 +37,7 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 flyway {
-	url="jdbc:mysql://localhost:3306/ddshop"
+	url="jdbc:mysql://localhost:3306/ddshop1"
 	user="root"
 	password="root"
 }

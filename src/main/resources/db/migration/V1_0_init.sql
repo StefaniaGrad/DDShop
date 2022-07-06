@@ -1,3 +1,4 @@
+/*
 CREATE TABLE User (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name varchar(255),
@@ -120,3 +121,4 @@ ADD FOREIGN KEY (product_attribute_id) REFERENCES Product_Attribute(id);
 
 
 
+*/
