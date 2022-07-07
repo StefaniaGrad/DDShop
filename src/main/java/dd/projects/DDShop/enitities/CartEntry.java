@@ -15,8 +15,8 @@ public class CartEntry {
     private int quantity;
 
     @ManyToOne
-    @JoinColumn(name="product_id")
-    private Product product;
+    @JoinColumn(name="variant_id")
+    private Variant variant;
 
     private int pricePerPice;
 

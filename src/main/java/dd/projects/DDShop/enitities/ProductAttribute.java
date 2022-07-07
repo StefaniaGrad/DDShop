@@ -17,8 +17,6 @@ public class ProductAttribute {
 
     private String Name;
 
-    @OneToOne(mappedBy = "productAttribute")
-    private Product product;
 
     @OneToMany(mappedBy = "productAttribute")
     private List<AttributeValue> attributeValues;

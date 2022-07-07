@@ -16,9 +16,10 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+   /* @OneToOne
     @JoinColumn(name = "user_id")
-    @RestResource(path = "cartUser", rel = "user")
+    @RestResource(path = "cartUser", rel = "user")*/
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
     private int totalPrice;
@@ -26,6 +27,4 @@ public class Cart {
     @OneToMany(mappedBy = "cart")
     private List<CartEntry> cartEntries;
 
-    @OneToOne(mappedBy = "cartOrder")
-    private Orders order;
 }

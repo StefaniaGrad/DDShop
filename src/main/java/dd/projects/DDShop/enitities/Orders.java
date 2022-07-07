@@ -17,25 +17,21 @@ public class Orders {
 
     private int totalPrice;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "cart_id")
-    @RestResource(path = "libraryAddress", rel="address")
-    private Cart cartOrder;
+//    @OneToOne
+//    @JoinColumn(name = "cart_id")
+//    @RestResource(path = "libraryAddress", rel="address")
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cart cart;
 
-    @OneToOne
-    @JoinColumn(name = "delivery_address_id")
-    @RestResource(path = "defaultDeliveryAddress", rel="address")
-    private Address defaultDeliveryAddress;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address deliveryAddress;
 
-    // @OneToOne(cascade = CascadeType.ALL)
-    @OneToOne
-    @JoinColumn(name = "billing_address_id")
-    @RestResource(path = "defaultBillingAddress", rel="address")
-    private Address defaultBillingAddress;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address billingAddress;
 
 
 }

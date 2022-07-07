@@ -25,22 +25,14 @@ public class User {
 
     private String phoneNumber;
 
-    //@OneToOne(cascade = CascadeType.ALL)
-    @OneToOne
-    @JoinColumn(name = "default_delivery_address_id")
-    @RestResource(path = "defaultDeliveryAddress", rel="address")
+    @OneToOne(cascade = CascadeType.ALL)
     private Address defaultDeliveryAddress;
 
-   // @OneToOne(cascade = CascadeType.ALL)
-   @OneToOne
-   @JoinColumn(name = "default_billing_address_id")
-   @RestResource(path = "defaultBillingAddress", rel="address")
+    @OneToOne(cascade = CascadeType.ALL)
     private Address defaultBillingAddress;
 
-    @OneToOne(mappedBy = "user")
-    private Cart cart;
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private List<Orders> orders;
 
 }
