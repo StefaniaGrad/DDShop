@@ -32,5 +32,7 @@ public class Order {
     @OneToOne(cascade = CascadeType.ALL)
     private Address billingAddress;
 
+    private int status;
+
 
 }
