@@ -1,5 +1,7 @@
 package dd.projects.DDShop.controllers;
 
+import dd.projects.DDShop.DTOs.UserCreateDTO;
+import dd.projects.DDShop.DTOs.UserDTO;
 import dd.projects.DDShop.enitities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,26 +16,30 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
-
     @GetMapping
-    @ResponseBody
-    List<User> read(){
+   @ResponseBody
+   List<UserDTO> read(){
         return userService.getUsers();
-    }
+  }
 
     @PostMapping
-    void create(@RequestBody User user){
-        userService.createUser(user);
+    UserCreateDTO create(@RequestBody UserCreateDTO user){
+        return userService.createUser(user);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseBody
-    User update(@RequestBody User user){
-        return userService.updateUser(user);
+    UserCreateDTO update(@PathVariable Integer id,@RequestBody UserCreateDTO user){
+        return userService.updateUser(id,user);
     }
 
     @DeleteMapping("/{id}")
     void delete(@PathVariable Integer id){
         userService.deleteUserById(id);
+    }
+
+    @GetMapping("/{id}")
+    UserDTO getUser(@PathVariable Integer id){
+        return userService.getUserById(id);
     }
 }

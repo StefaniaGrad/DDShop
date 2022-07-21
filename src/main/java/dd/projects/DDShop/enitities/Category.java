@@ -1,12 +1,11 @@
 package dd.projects.DDShop.enitities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -18,12 +17,20 @@ public class Category {
 
     private String name;
 
-    private String description;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "category",  cascade = CascadeType.ALL)
+    private List<Subcategory> subcategories;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "product_category",
-            joinColumns ={ @JoinColumn(name = "category_id")},
-            inverseJoinColumns ={ @JoinColumn(name = "product_id")})
-    private List<Product> products;
+    public Category(String name) {
+        this.name = name;
+    }
 
+    public Category() {
+    }
+
+    public Category(int id, String name, List<Subcategory> subcategories) {
+        this.id = id;
+        this.name = name;
+        this.subcategories = subcategories;
+    }
 }

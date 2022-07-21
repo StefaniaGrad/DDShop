@@ -1,16 +1,21 @@
 package dd.projects.DDShop.enitities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
 @Entity
 public class Product {
 
@@ -18,28 +23,32 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column
     private String name;
 
     private String description;
 
-    private int price;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name="subcategory_id")
+    private Subcategory subcategory;
 
-    private int availableQuantity;
-
-    @ManyToMany(mappedBy = "products")
-    private List<Category> category;
-
-//    @OneToOne
-//    @JoinColumn(name = "attribute_id")
-//    @RestResource(path = "productAttribute", rel="attribute")
-    @OneToOne(cascade = CascadeType.ALL)
-    private ProductAttribute attribute;
-
-    @OneToMany(mappedBy = "variant")
-    private List<CartEntry> cartEntryList;
-
-    @OneToMany(mappedBy = "product")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<Variant> variants;
 
+    public Product(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
+    public Product(int id, String name, String description, List<Variant> variants) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.variants = variants;
+    }
+
+    public Product() {
+    }
 }
