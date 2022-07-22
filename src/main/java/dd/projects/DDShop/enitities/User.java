@@ -1,12 +1,13 @@
 package dd.projects.DDShop.enitities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.List;
-
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -31,8 +32,31 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private Address defaultBillingAddress;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL)
-    private List<Orders> orders;
+    private List<Order> orders;
 
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String email, String password, String phoneNumber, Address defaultDeliveryAddress, Address defaultBillingAddress) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.defaultDeliveryAddress = defaultDeliveryAddress;
+        this.defaultBillingAddress = defaultBillingAddress;
+    }
+
+    public User(String firstName, String lastName, String email, String phoneNumber, Address defaultDeliveryAddress, Address defaultBillingAddress, List<Order> orders) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.defaultDeliveryAddress = defaultDeliveryAddress;
+        this.defaultBillingAddress = defaultBillingAddress;
+        this.orders = orders;
+    }
 }

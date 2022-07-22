@@ -1,6 +1,6 @@
 package dd.projects.DDShop.services;
 
-import dd.projects.DDShop.enitities.Orders;
+import dd.projects.DDShop.enitities.Order;
 import dd.projects.DDShop.repositories.OrdersRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +16,17 @@ public class OrdersService {
 
     public OrdersRepository getOrderRepository(){ return ordersRepository;}
 
-    public Orders createOrder(Orders orders)
+    public Order createOrder(Order order)
     {
-        return ordersRepository.save(orders);
+        return ordersRepository.save(order);
     }
 
-    public List<Orders> getOrders(){
+    public List<Order> getOrders(){
         return ordersRepository.findAll();
     }
 
-    public  Orders updateOrder(Orders orders){
-        return ordersRepository.save(orders);
+    public Order updateOrder(Order order){
+        return ordersRepository.save(order);
     }
 
     public void deleteOrderById(int id) { ordersRepository.deleteById(id);}

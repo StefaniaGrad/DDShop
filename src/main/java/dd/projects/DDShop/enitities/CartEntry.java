@@ -1,5 +1,6 @@
 package dd.projects.DDShop.enitities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,8 @@ public class CartEntry {
 
     private int quantity;
 
+
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="variant_id")
     private Variant variant;
@@ -22,6 +25,7 @@ public class CartEntry {
 
     private int totalPricePerEntry;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="cart_id")
     private Cart cart;

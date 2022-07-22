@@ -1,9 +1,14 @@
 package dd.projects.DDShop.controllers;
 
-import dd.projects.DDShop.enitities.Category;
-import dd.projects.DDShop.enitities.User;
+import dd.projects.DDShop.DTOs.CategoryCreateDTO;
+import dd.projects.DDShop.DTOs.CategoryGetDTO;
+import dd.projects.DDShop.DTOs.SubcategoryCreateDTO;
+import dd.projects.DDShop.enitities.Subcategory;
+import dd.projects.DDShop.repositories.SubcategoryRepository;
 import dd.projects.DDShop.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,21 +19,33 @@ public class CategoryController {
 
     @Autowired
     CategoryService categoryService;
+    @Autowired
+    SubcategoryRepository subcategoryRepository;
+
 
     @PostMapping
-    void create(@RequestBody Category category){
-        categoryService.createCategory(category);
+    CategoryCreateDTO create(@RequestBody CategoryCreateDTO category){
+
+       return categoryService.createCategory(category);
     }
 
     @GetMapping
     @ResponseBody
-    List<Category> read(){
+    List<CategoryGetDTO> read(){
         return categoryService.getCategories();
     }
 
-    @PutMapping
+
+    @GetMapping("/{id}")
     @ResponseBody
-    Category update(@RequestBody Category category){
+    CategoryGetDTO read2(@PathVariable Integer id){
+        return categoryService.getCategoryById(id);
+    }
+
+
+    @PutMapping
+    //@ResponseBody
+    public CategoryGetDTO update(@RequestBody CategoryGetDTO category){
         return categoryService.updateCategory(category);
     }
 
@@ -36,5 +53,8 @@ public class CategoryController {
     void delete(@PathVariable Integer id){
         categoryService.deleteCategoryById(id);
     }
+
+
+
 
 }
