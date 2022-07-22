@@ -26,4 +26,6 @@ public class OrderDTO {
 
     private AddressDTO billingAddress;
 
+    private int status;
+
 }
